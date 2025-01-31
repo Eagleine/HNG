@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miller's Profile Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .card h2, .card p {
+            margin: 10px 0;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: bold;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="C:\Users\User\IMG_20230523_103448.heif" alt="Profile Picture" data-testid="profilePicture">
+        <h2 data-testid="fullName">Isaac Miller</h2>
+        <p data-testid="jobTitle">Front-End Developer</p>
+        <p data-testid="shortBio">A passionate developer who loves building interactive and user-friendly web applications.</p>
+        <p data-testid="currentLocation">Lagos, Nigeria</p>
+        <p data-testid="emailAddress">isaac.miller@miva.edu.ng</p>
+        <div class="social-links" data-testid="socialLinks">
+            <a href="https://www.linkedin.com/in/miller-isaac-eagleine/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Eagleine" target="_blank">GitHub</a>
+            <a href="https://twitter.com/millizo" target="_blank">Twitter</a>
+        </div>
+        <p data-testid="currentTimeUTC" id="utcTime"></p>
+    </div>
+
+    <script>
+        function updateTime() {
+            const utcTimeElement = document.getElementById('utcTime');
+            const now = new Date();
+            utcTimeElement.textContent = `UTC Time: ${now.toUTCString()}`;
+        }
+        updateTime();
+    </script>
+</body>
+</html>
