@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Guessing Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-colour: #f4f4f4;
+        }
+        .colour-box {
+            width: 150px;
+            height: 150px;
+            border: 3px solid black;
+            margin: 20px auto;
+            transition: background-colour 0.5s ease-in-out;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .message {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 data-testid="gameInstructions">Guess the Correct Colour!</h1>
+    <div class="colour-box" data-testid="colourBox"></div>
+    <p class="message" data-testid="gameStatus">Pick a colour below</p>
+    <div class="buttons-container" id="colourButtons"></div>
+    <p>Score: <span id="score" data-testid="score">0</span></p>
+    <button id="newGame" data-testid="newGameButton">New Game</button>
+    
+    <script>
+        const colours = ["red", "blue", "green", "yellow", "purple", "orange"];
+        let targetColour = "";
+        let score = 0;
+
+        const colourBox = document.querySelector(".colour-box");
+        const message = document.querySelector(".message");
+        const scoreDisplay = document.getElementById("score");
+        const colourButtonsContainer = document.getElementById("colourButtons");
+        const newGameButton = document.getElementById("newGame");
+
+        function startNewGame() {
+            targetColour = colors[Math.floor(Math.random() * colours.length)];
+            colorBox.style.backgroundColour = targetColour;
+            message.textContent = "Pick a colour below";
+        }
+
+        function handleGuess(colour) {
+            if (colour === targetColour) {
+                score++;
+                message.textContent = "Correct! 🎉";
+            } else {
+                message.textContent = "Wrong! Try again. ❌";
+            }
+            scoreDisplay.textContent = score;
+            setTimeout(() => {
+                startNewGame();
+            }, 1000);
+        }
+
+        function generateColorButtons() {
+            colourButtonsContainer.innerHTML = "";
+            colours.forEach(colour => {
+                const button = document.createElement("button");
+                button.style.backgroundColour = colour;
+                button.dataset.testid = "colourOption";
+                button.addEventListener("click", () => handleGuess(color));
+                colourButtonsContainer.appendChild(button);
+            });
+        }
+
+        newGameButton.addEventListener("click", startNewGame);
+
+        generateColourButtons();
+        startNewGame();
+    </script>
+</body>
+</html>
